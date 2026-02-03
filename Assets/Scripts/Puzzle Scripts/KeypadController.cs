@@ -7,18 +7,19 @@ public class KeypadController : MonoBehaviour
     public TextMeshProUGUI displayText;
 
     [Header("Password")]
-    public string correctPassword = "371";
+    public string correctPassword = "2814";
     public int maxLength = 4;
+    public int flag;
 
     string currentInput = "";
 
     void Start()
     {
         displayText.text = "----";
-
+        flag = 1;
        //UpdateDisplay();
     }
-
+    #region Buttons
     // ====== NUMBERS ======
     public void AddNumber(string number)
     {
@@ -49,11 +50,16 @@ public class KeypadController : MonoBehaviour
     // ====== SUBMIT ======
     public void Submit()
     {
-        if (currentInput == correctPassword)
+        if (currentInput == correctPassword )
+        {
             Unlock();
+
+        }
         else
             WrongPassword();
     }
+
+    #endregion
 
     void UpdateDisplay()
     {
@@ -61,8 +67,18 @@ public class KeypadController : MonoBehaviour
     }
 
     void Unlock()
-    {
-        Debug.Log("UNLOCK");
+    {   
+        if (flag == 1)
+        {
+            Debug.Log("UNLOCK 1 ");
+            flag++;
+            correctPassword = "48";
+            ClearAll();
+        }
+        else if (flag == 2)
+        {
+            Debug.Log("UNLOCK 2 ");
+        }
     }
 
     void WrongPassword()
