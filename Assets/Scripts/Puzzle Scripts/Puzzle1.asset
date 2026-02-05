@@ -1,0 +1,28 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ffcc0d48a5a07af47830535aa866ad68, type: 3}
+  m_Name: Puzzle1
+  m_EditorClassIdentifier: Assembly-CSharp::PuzzleData
+  question: 'A moment etched in public claim
+
+    when egypt rose to global fame
+
+    one
+    place, one kam , one record tall
+
+    the number named unlocks it all '
+  hints:
+  - Happened in EGJ 2018
+  - EGJ broke a record
+  - no. of participants
+  correctAnswer: 2418
+  baseScore: 100
