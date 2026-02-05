@@ -15,7 +15,7 @@ public class SpwanBall : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (OVRInput.Get(OVRInput.Button.SecondaryIndexTrigger, OVRInput.Controller.RHand))
+        if (OVRInput.GetDown(OVRInput.Button.SecondaryIndexTrigger))
         {
             GameObject spwanedBall = Instantiate(prefab_Obj, transform.position, Quaternion.identity);
             Rigidbody spwanedBallRB = spwanedBall.GetComponent<Rigidbody>();
