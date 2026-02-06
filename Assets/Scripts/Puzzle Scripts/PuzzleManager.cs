@@ -6,12 +6,12 @@ public class PuzzleManager : MonoBehaviour
     [Header("Puzzles")]
     [SerializeField] private List<PuzzleData> puzzles;
 
-    private int currentPuzzleIndex = 0;
-
     [Header("References")]
     [SerializeField] private PuzzleUIController puzzleUI;
     [SerializeField] private ScoreManager scoreManager;
+    [SerializeField] private KeypadController keypad;
 
+    private int currentPuzzleIndex = 0;
     private PuzzleData currentPuzzle;
 
     void Start()
@@ -23,23 +23,20 @@ public class PuzzleManager : MonoBehaviour
     {
         if (currentPuzzleIndex >= puzzles.Count)
         {
-            Debug.Log("All puzzles solved!");
+            Debug.Log("ALL PUZZLES SOLVED");
             return;
         }
 
         currentPuzzle = puzzles[currentPuzzleIndex];
+
         scoreManager.SetScore(currentPuzzle.baseScore);
         puzzleUI.LoadPuzzle(currentPuzzle);
+        keypad.SetCorrectAnswer(currentPuzzle.correctAnswer);
     }
 
     public void OnPuzzleSolved()
     {
         currentPuzzleIndex++;
         LoadPuzzle();
-    }
-
-    public bool CheckAnswer(string input)
-    {
-        return input == currentPuzzle.correctAnswer;
     }
 }

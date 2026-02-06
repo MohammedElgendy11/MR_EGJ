@@ -15,13 +15,12 @@ public class ScoreManager : MonoBehaviour
 
     public void DecreaseScore(int amount)
     {
-        score -= amount;
-        score = Mathf.Max(0, score);
+        score = Mathf.Max(0, score - amount);
         UpdateUI();
     }
 
     void UpdateUI()
     {
-        scoreText.text = "Score: " + score;
+        scoreText.text = $"Score: {score}";
     }
 }

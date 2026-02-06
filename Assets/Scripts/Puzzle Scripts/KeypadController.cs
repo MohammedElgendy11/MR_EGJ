@@ -4,23 +4,30 @@ using TMPro;
 public class KeypadController : MonoBehaviour
 {
     [Header("UI")]
-    public TextMeshProUGUI displayText;
+    [SerializeField] private TextMeshProUGUI displayText;
 
-    [Header("Password")]
-    public string correctPassword = "2814";
-    public int maxLength = 4;
-    public int flag;
+    [Header("Settings")]
+    [SerializeField] private int maxLength = 6;
 
-    string currentInput = "";
+    [Header("References")]
+    [SerializeField] private PuzzleManager puzzleManager;
+
+    private string correctAnswer;
+    private string currentInput = "";
 
     void Start()
     {
-        displayText.text = "----";
-        flag = 1;
-       //UpdateDisplay();
+        UpdateDisplay();
     }
+
+    public void SetCorrectAnswer(string answer)
+    {
+        correctAnswer = answer;
+        ClearAll();
+    }
+
     #region Buttons
-    // ====== NUMBERS ======
+
     public void AddNumber(string number)
     {
         if (currentInput.Length >= maxLength)
@@ -30,14 +37,6 @@ public class KeypadController : MonoBehaviour
         UpdateDisplay();
     }
 
-    // ====== CLEAR ALL ======
-    public void ClearAll()
-    {
-        currentInput = "";
-        UpdateDisplay();
-    }
-
-    // ====== BACKSPACE ======
     public void RemoveLast()
     {
         if (currentInput.Length == 0)
@@ -47,43 +46,30 @@ public class KeypadController : MonoBehaviour
         UpdateDisplay();
     }
 
-    // ====== SUBMIT ======
+    public void ClearAll()
+    {
+        currentInput = "";
+        UpdateDisplay();
+    }
+
     public void Submit()
     {
-        if (currentInput == correctPassword )
+        if (currentInput == correctAnswer)
         {
-            Unlock();
-
+            puzzleManager.OnPuzzleSolved();
         }
         else
-            WrongPassword();
+        {
+            Debug.Log("WRONG PASSWORD");
+        }
+
+        ClearAll();
     }
 
     #endregion
 
     void UpdateDisplay()
     {
-        displayText.text = currentInput;
-    }
-
-    void Unlock()
-    {   
-        if (flag == 1)
-        {
-            Debug.Log("UNLOCK 1 ");
-            flag++;
-            correctPassword = "48";
-            ClearAll();
-        }
-        else if (flag == 2)
-        {
-            Debug.Log("UNLOCK 2 ");
-        }
-    }
-
-    void WrongPassword()
-    {
-        Debug.Log("WRONG");
-        ClearAll();
+        displayText.text = string.IsNullOrEmpty(currentInput) ? "----" : currentInput;
     }
 }
