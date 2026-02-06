@@ -2,6 +2,9 @@ using UnityEngine;
 
 public class SpwanBall : MonoBehaviour
 {
+
+    // Just For Testing
+
     public GameObject prefab_Obj;
     public float Spwanspeed = 5f;
 
@@ -15,11 +18,11 @@ public class SpwanBall : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (OVRInput.GetDown(OVRInput.Button.SecondaryIndexTrigger))
-        {
-            GameObject spwanedBall = Instantiate(prefab_Obj, transform.position, Quaternion.identity);
-            Rigidbody spwanedBallRB = spwanedBall.GetComponent<Rigidbody>();
-            spwanedBallRB.linearVelocity = transform.forward * Spwanspeed;
-        }
+        //if (OVRInput.GetDown(OVRInput.Button.SecondaryIndexTrigger))
+        //{
+        //    GameObject spwanedBall = Instantiate(prefab_Obj, transform.position, Quaternion.identity);
+        //    Rigidbody spwanedBallRB = spwanedBall.GetComponent<Rigidbody>();
+        //    spwanedBallRB.linearVelocity = transform.forward * Spwanspeed;
+        //}
     }
 }
