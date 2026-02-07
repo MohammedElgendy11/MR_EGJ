@@ -8,6 +8,7 @@ public class PuzzleManager : MonoBehaviour
 
     [Header("References")]
     [SerializeField] private PuzzleUIController puzzleUI;
+    [SerializeField] private GameObject KeyPadUI;
     [SerializeField] private ScoreManager scoreManager;
     [SerializeField] private KeypadController keypad;
 
@@ -23,6 +24,7 @@ public class PuzzleManager : MonoBehaviour
         if (currentPuzzleIndex >= puzzles.Count)
         {
             puzzleUI.gameObject.SetActive(false);
+            KeyPadUI.SetActive(false);
             return;
         }
 

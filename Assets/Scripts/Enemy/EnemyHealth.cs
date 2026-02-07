@@ -1,5 +1,5 @@
 ﻿using UnityEngine;
-
+using System;
 public class EnemyHealth : MonoBehaviour
 {
     //public GameObject ashEffectPrefab; // اسحب هنا الـ Particle System بتاع الرماد
@@ -7,6 +7,7 @@ public class EnemyHealth : MonoBehaviour
     private MeshRenderer[] meshRenderers;
     private bool isDead = false;
     private float dissolveAmount = 0;
+    public static event Action OnEnemyDied;
 
     void Start()
     {
@@ -22,6 +23,7 @@ public class EnemyHealth : MonoBehaviour
 
     void Die()
     {
+        OnEnemyDied?.Invoke();     
         Debug.Log("Hit By Sword");
         isDead = true;
         Destroy(gameObject);

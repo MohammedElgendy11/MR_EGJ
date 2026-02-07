@@ -1,23 +1,27 @@
 ﻿using UnityEngine;
 using System.Collections;
-using System.Collections.Generic; 
 
 public class EnemySpawner : MonoBehaviour
 {
     public GameObject enemyPrefab;
-
-    [Header("Spawn Locations")]
-    public Transform[] spawnPositions; 
+    public Transform[] spawnPositions;
     public float spawnRate = 2f;
+
+    [Header("UI")]
+    [SerializeField] private GameObject endPanel;
+
+    private int aliveEnemies;
 
     void OnEnable()
     {
         KeypadController.OnPuzzleCompleted += StartSpawning;
+        EnemyHealth.OnEnemyDied += OnEnemyKilled;
     }
 
     void OnDisable()
     {
         KeypadController.OnPuzzleCompleted -= StartSpawning;
+        EnemyHealth.OnEnemyDied -= OnEnemyKilled;
     }
 
     void StartSpawning()
@@ -34,15 +38,20 @@ public class EnemySpawner : MonoBehaviour
         }
     }
 
-    public void SpawnEnemy()
+    void SpawnEnemy()
     {
-        if (spawnPositions.Length == 0)
+        Transform point = spawnPositions[Random.Range(0, spawnPositions.Length)];
+        Instantiate(enemyPrefab, point.position, point.rotation);
+        aliveEnemies++;
+    }
+
+    void OnEnemyKilled()
+    {
+        aliveEnemies--;
+
+        if (aliveEnemies <= 0)
         {
-            Debug.LogWarning("No spawn positions assigned");
-            return;
+            endPanel.SetActive(true);
         }
-        int randomIndex = Random.Range(0, spawnPositions.Length);
-        Transform selectedPoint = spawnPositions[randomIndex];
-        Instantiate(enemyPrefab, selectedPoint.position, selectedPoint.rotation);
     }
 }
