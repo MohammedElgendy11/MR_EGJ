@@ -5,11 +5,11 @@ public class ScoreManager : MonoBehaviour
 {
     [SerializeField] private TextMeshProUGUI scoreText;
 
-    private int score;
+    private int score = 0;
 
-    public void SetScore(int value)
+    public void AddScore(int amount)
     {
-        score = value;
+        score += amount;
         UpdateUI();
     }
 

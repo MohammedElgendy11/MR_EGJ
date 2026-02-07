@@ -12,7 +12,6 @@ public class PuzzleManager : MonoBehaviour
     [SerializeField] private KeypadController keypad;
 
     private int currentPuzzleIndex = 0;
-    private PuzzleData currentPuzzle;
 
     void Start()
     {
@@ -23,15 +22,15 @@ public class PuzzleManager : MonoBehaviour
     {
         if (currentPuzzleIndex >= puzzles.Count)
         {
-            Debug.Log("ALL PUZZLES SOLVED");
+            puzzleUI.gameObject.SetActive(false);
             return;
         }
 
-        currentPuzzle = puzzles[currentPuzzleIndex];
+        PuzzleData puzzle = puzzles[currentPuzzleIndex];
 
-        scoreManager.SetScore(currentPuzzle.baseScore);
-        puzzleUI.LoadPuzzle(currentPuzzle);
-        keypad.SetCorrectAnswer(currentPuzzle.correctAnswer);
+        scoreManager.AddScore(puzzle.baseScore);
+        puzzleUI.LoadPuzzle(puzzle);
+        keypad.correctPassword = puzzle.correctAnswer;
     }
 
     public void OnPuzzleSolved()
