@@ -1523,7 +1523,7 @@ MonoBehaviour:
   SpawnOnStart: 1
   SeedValue: 1
   PrefabsToSpawn:
-  - Labels: 4128
+  - Labels: 4096
     Prefabs:
     - {fileID: 5949846936960801708, guid: 9ad42ccf472219641b3d280893047ba1, type: 3}
     PrefabSelection: 0
