@@ -22,6 +22,7 @@ public class KeypadController : MonoBehaviour
     private string currentInput = "";
     private int flag;
     private Animator mash_anim;
+    private bool isLocked = false;
 
     public static event Action OnPuzzleCompleted;
 
@@ -33,6 +34,8 @@ public class KeypadController : MonoBehaviour
 
     public void AddNumber(string number)
     {
+        if (isLocked) return;
+
         int usedMaxLength = maxLength_serialized > 0 ? maxLength_serialized : maxLength;
 
         if (currentInput.Length >= usedMaxLength)
@@ -44,6 +47,8 @@ public class KeypadController : MonoBehaviour
 
     public void RemoveLast()
     {
+        if (isLocked) return;
+
         if (currentInput.Length == 0)
             return;
 
@@ -53,23 +58,42 @@ public class KeypadController : MonoBehaviour
 
     public void ClearAll()
     {
+        if (isLocked) return;
+
         currentInput = "";
         UpdateDisplay();
     }
 
     public void Submit()
     {
+        if (isLocked) return;
+
         if (currentInput == correctPassword)
         {
             Unlock();
             if (puzzleManager != null)
                 puzzleManager.OnPuzzleSolved();
+
+            ClearAll();
         }
         else
         {
-            Debug.Log("WRONG PASSWORD");
+            StartCoroutine(ShowErrorRoutine());
         }
+    }
 
+    private IEnumerator ShowErrorRoutine()
+    {
+        isLocked = true;
+        Color originalColor = displayText.color;
+
+        displayText.text = "ERROR";
+        displayText.color = Color.red;
+
+        yield return new WaitForSeconds(1f);
+
+        displayText.color = originalColor;
+        isLocked = false;
         ClearAll();
     }
 
