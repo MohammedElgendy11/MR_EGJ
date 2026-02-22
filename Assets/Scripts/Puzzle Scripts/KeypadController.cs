@@ -23,16 +23,36 @@ public class KeypadController : MonoBehaviour
     private int flag;
     private Animator mash_anim;
 
+    // Palette: Visual feedback state
+    private bool isLocked = false;
+    private Color defaultColor;
+
     public static event Action OnPuzzleCompleted;
 
     void Start()
     {
+        if (displayText != null)
+            defaultColor = displayText.color;
+
         displayText.text = "----";
         flag = 1;
     }
 
+    void OnDisable()
+    {
+        // Prevent keypad from getting stuck if disabled during error feedback
+        if (isLocked)
+        {
+            isLocked = false;
+            if (displayText != null)
+                displayText.color = defaultColor;
+        }
+    }
+
     public void AddNumber(string number)
     {
+        if (isLocked) return;
+
         int usedMaxLength = maxLength_serialized > 0 ? maxLength_serialized : maxLength;
 
         if (currentInput.Length >= usedMaxLength)
@@ -44,6 +64,8 @@ public class KeypadController : MonoBehaviour
 
     public void RemoveLast()
     {
+        if (isLocked) return;
+
         if (currentInput.Length == 0)
             return;
 
@@ -53,24 +75,52 @@ public class KeypadController : MonoBehaviour
 
     public void ClearAll()
     {
+        if (isLocked) return;
+
         currentInput = "";
         UpdateDisplay();
     }
 
     public void Submit()
     {
+        if (isLocked) return;
+
         if (currentInput == correctPassword)
         {
             Unlock();
             if (puzzleManager != null)
                 puzzleManager.OnPuzzleSolved();
+
+            ClearAll();
         }
         else
         {
             Debug.Log("WRONG PASSWORD");
+            StartCoroutine(ShowErrorFeedback());
+        }
+    }
+
+    IEnumerator ShowErrorFeedback()
+    {
+        isLocked = true;
+
+        if (displayText != null)
+        {
+            displayText.color = Color.red;
+            displayText.text = "ERROR";
         }
 
-        ClearAll();
+        yield return new WaitForSeconds(1f);
+
+        if (displayText != null)
+        {
+            displayText.color = defaultColor;
+        }
+
+        // Reset input and unlock
+        currentInput = "";
+        UpdateDisplay();
+        isLocked = false;
     }
 
     void UpdateDisplay()
