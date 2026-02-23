@@ -25,14 +25,32 @@ public class KeypadController : MonoBehaviour
 
     public static event Action OnPuzzleCompleted;
 
+    private bool isLocked = false;
+    private Color defaultColor;
+
     void Start()
     {
         displayText.text = "----";
         flag = 1;
+        if (displayText != null)
+            defaultColor = displayText.color;
+    }
+
+    void OnDisable()
+    {
+        isLocked = false;
+        currentInput = "";
+        if (displayText != null)
+        {
+            displayText.color = defaultColor;
+            displayText.text = "----";
+        }
     }
 
     public void AddNumber(string number)
     {
+        if (isLocked) return;
+
         int usedMaxLength = maxLength_serialized > 0 ? maxLength_serialized : maxLength;
 
         if (currentInput.Length >= usedMaxLength)
@@ -44,6 +62,8 @@ public class KeypadController : MonoBehaviour
 
     public void RemoveLast()
     {
+        if (isLocked) return;
+
         if (currentInput.Length == 0)
             return;
 
@@ -53,24 +73,68 @@ public class KeypadController : MonoBehaviour
 
     public void ClearAll()
     {
+        if (isLocked) return;
+
         currentInput = "";
         UpdateDisplay();
     }
 
     public void Submit()
     {
+        if (isLocked) return;
+
         if (currentInput == correctPassword)
         {
-            Unlock();
-            if (puzzleManager != null)
-                puzzleManager.OnPuzzleSolved();
+            StartCoroutine(HandleSuccess());
         }
         else
         {
-            Debug.Log("WRONG PASSWORD");
+            StartCoroutine(HandleFailure());
+        }
+    }
+
+    private IEnumerator HandleSuccess()
+    {
+        isLocked = true;
+        if (displayText != null)
+        {
+            displayText.color = Color.green;
+            displayText.text = "ACCESS";
         }
 
-        ClearAll();
+        yield return new WaitForSeconds(0.5f);
+
+        Unlock();
+        if (puzzleManager != null)
+            puzzleManager.OnPuzzleSolved();
+
+        // Reset
+        currentInput = "";
+        UpdateDisplay();
+        if (displayText != null)
+            displayText.color = defaultColor;
+
+        isLocked = false;
+    }
+
+    private IEnumerator HandleFailure()
+    {
+        isLocked = true;
+        if (displayText != null)
+        {
+            displayText.color = Color.red;
+            displayText.text = "DENIED";
+        }
+
+        yield return new WaitForSeconds(1.0f);
+
+        // Reset
+        currentInput = "";
+        UpdateDisplay();
+        if (displayText != null)
+            displayText.color = defaultColor;
+
+        isLocked = false;
     }
 
     void UpdateDisplay()
