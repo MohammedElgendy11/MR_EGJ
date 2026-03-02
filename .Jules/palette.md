@@ -1,0 +1,3 @@
+## 2026-03-02 - UI Button Tactile Feedback Animation in VR
+**Learning:** Coroutine-based tactile feedback animations on UI components (like scaling down and up on press) require stopping any existing coroutine instance before starting a new one. This prevents visual stacking and glitching from rapid consecutive interactions, which is very common in VR UI. Furthermore, the UI element's state (e.g. `localScale`) must be reset in `OnDisable` to avoid leaving the object in a modified scale state if it's deactivated mid-animation.
+**Action:** Always store the coroutine reference for UI feedback animations, call `StopCoroutine` before instantiating a new feedback animation, and restore original state (like scale) in `OnDisable`.
