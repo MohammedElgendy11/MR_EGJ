@@ -97,7 +97,7 @@ public class KeypadController : MonoBehaviour
     {
         if (mash_anim == null)
         {
-            var mashrabya = FindFirstObjectByType<Mashrabya_Tags>();
+            var mashrabya = UnityEngine.Object.FindFirstObjectByType<Mashrabya_Tags>();
             if (mashrabya != null)
                 mash_anim = mashrabya.GetComponent<Animator>();
         }
