@@ -1,0 +1,3 @@
+## 2026-03-05 - [Visual feedback and coroutine management for VR UI buttons]
+**Learning:** [VR UI interactions benefit greatly from tactile/visual micro-animations (like scaling down and up on press). A robust implementation must also stop existing animation coroutines upon repeated interactions to prevent conflicting scales and must reset transformations in OnDisable to prevent visual bugs when deactivated during an animation.]
+**Action:** [When implementing UI feedback animations via Coroutines for VR buttons, stop existing coroutines before starting new ones and add cleanup code in OnDisable to reset the component's state (e.g., transform.localScale).]
