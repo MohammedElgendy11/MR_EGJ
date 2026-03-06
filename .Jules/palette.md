@@ -1,0 +1,3 @@
+## 2024-05-24 - [VR Tactile Feedback]
+**Learning:** In VR, users lack physical resistance when interacting with virtual UI components (like keypads or hint buttons). Without immediate micro-feedback, they may be unsure if their input registered.
+**Action:** Always implement a brief coroutine-based scale animation (e.g., scaling down to 0.9x and back over ~0.1s) to provide visual "tactile" confirmation on interactive elements. This micro-UX significantly improves interaction confidence.
