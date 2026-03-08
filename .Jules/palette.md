@@ -1,0 +1,3 @@
+## 2025-03-08 - Tactile Visual Feedback in VR UI
+**Learning:** VR UI buttons require immediate visual or physical feedback since users lack the tactile resistance of real-world buttons. Without it, users may tap multiple times or feel disconnected from the action.
+**Action:** When implementing interactive UI elements in VR projects, apply micro-animations (like a quick 0.1s scale-down/scale-up) using coroutines to simulate a physical button press. Always cache the initial scale in `Awake` and ensure states are reset in `OnDisable` to avoid conflicts with custom Inspector property modifications.
