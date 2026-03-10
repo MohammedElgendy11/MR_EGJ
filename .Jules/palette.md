@@ -1,0 +1,3 @@
+## 2024-05-18 - VR UI Button Visual Feedback
+**Learning:** In VR environments without physical tactile feedback, interactive UI elements (like keypad buttons) often lack intuitive visual feedback when pressed, leaving users unsure if their interaction registered. A small, fast scale animation (e.g., to 0.9x and back over 0.1s) bridges this gap effectively.
+**Action:** When creating VR UI buttons, implement a lightweight coroutine-based scale animation. Ensure the initial scale is cached in `Awake()` and state is reset in `OnDisable()` to avoid overriding custom Inspector properties or leaving the component in a corrupted visual state if interrupted.
