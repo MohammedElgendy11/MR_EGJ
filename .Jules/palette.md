@@ -1,0 +1,3 @@
+## 2024-05-24 - VR Button Feedback
+**Learning:** In VR interfaces, interactive components (like keypad buttons) benefit from immediate tactile/visual feedback when pressed. A simple scale animation (scaling down to 0.9x and back up over 0.1s) provides an intuitive response.
+**Action:** When adding interaction animations (especially coroutines) on UI elements, always cache the original state (like `Transform.localScale`) in `Awake()`. Always stop existing running coroutines before starting a new one, and critically, reset the cached state in `OnDisable()` so the object does not get stuck in a scaled-down state if deactivated midway through the animation.
