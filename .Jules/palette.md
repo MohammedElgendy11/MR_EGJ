@@ -1,0 +1,3 @@
+## 2024-03-15 - VR UI Component Animation State Stability
+**Learning:** Temporary states implemented via coroutines for micro-UX feedback (like scaling a button down on press) in VR elements can permanently override custom Inspector-set base properties if interrupted (e.g., component disabled mid-animation).
+**Action:** Always cache base states (e.g., `transform.localScale`) in `Awake()` and explicitly reset them and stop associated coroutines in `OnDisable()` to prevent state drift on frequently toggled UI elements.
