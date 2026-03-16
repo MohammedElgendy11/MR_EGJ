@@ -1,0 +1,3 @@
+## 2024-03-16 - Tactile Feedback Coroutines in VR UI
+**Learning:** Adding simple scale animations (scaling down slightly then back up) to VR buttons significantly improves the tactile feel and responsiveness of the interface, compensating for the lack of physical feedback. However, these coroutine-based animations can permanently distort the button's custom Inspector scale if the GameObject is disabled mid-animation.
+**Action:** Always cache the original scale in `Awake()` and restore it in `OnDisable()`. Ensure any existing animation coroutine is stopped before starting a new one to prevent state conflicts.
