@@ -1,0 +1,3 @@
+## 2024-05-18 - VR Tactile Feedback animations
+**Learning:** Coroutine-based scale animations providing tactile feedback to users in VR space must carefully reset temporary state in `OnDisable` using the initial values cached in `Awake()`. Hardcoding default scales or failing to reset scale during script disables will permanently modify the object's transform, breaking custom Inspector scales.
+**Action:** Always capture initial `transform.localScale` in `Awake()` and restore it in `OnDisable()`. Wrap `StartCoroutine` calls with `if (gameObject.activeInHierarchy)` and clean up references appropriately to avoid Unity coroutine errors.
