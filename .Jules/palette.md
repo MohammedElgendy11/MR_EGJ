@@ -1,0 +1,3 @@
+## 2024-03-24 - Coroutine Scaling for VR Buttons
+**Learning:** Hardcoding scales (like `Vector3.one`) in temporary button animation coroutines can break custom scaling applied by designers in the Unity Inspector. VR buttons benefit significantly from immediate scaling feedback, but it must be self-contained and non-destructive.
+**Action:** Always cache `initialScale` in `Awake()`, restore it in `OnDisable()`, and use it as the base for any relative scaling animations (like `initialScale * 0.9f`). Always check `gameObject.activeInHierarchy` before starting a new coroutine to prevent exceptions if the button's action disables itself.
