@@ -1,0 +1,3 @@
+## 2024-05-14 - Add tactile visual feedback to VR puzzle buttons
+**Learning:** In VR interfaces, interactive UI elements like buttons lack physical tactile feedback. Adding micro-animations (e.g., scale changes) using Coroutines significantly improves the perception of responsiveness and user satisfaction.
+**Action:** When implementing temporary scale animations on MonoBehaviours via Coroutines, always stop existing coroutines first, cache the original scale in `Awake()`, ensure `gameObject.activeInHierarchy` is true before starting, and critically, reset the transform scale to the cached original scale in `OnDisable()` to prevent overriding custom Inspector properties when objects are disabled mid-animation.
