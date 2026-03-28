@@ -1,12 +1,42 @@
 using UnityEngine;
 
+using System.Collections;
+
 public class KeypadButton : MonoBehaviour
 {
     public string value; 
     public KeypadController keypad;
 
+    private Vector3 originalScale;
+    private Coroutine pressCoroutine;
+
+    private void Awake()
+    {
+        originalScale = transform.localScale;
+    }
+
+    private void OnDisable()
+    {
+        transform.localScale = originalScale;
+    }
+
     public void Press()
     {
         keypad.AddNumber(value);
+
+        if (gameObject.activeInHierarchy)
+        {
+            if (pressCoroutine != null)
+                StopCoroutine(pressCoroutine);
+            pressCoroutine = StartCoroutine(AnimatePress());
+        }
+    }
+
+    private IEnumerator AnimatePress()
+    {
+        transform.localScale = originalScale * 0.9f;
+        yield return new WaitForSeconds(0.05f);
+        transform.localScale = originalScale;
+        yield return new WaitForSeconds(0.05f);
     }
 }
