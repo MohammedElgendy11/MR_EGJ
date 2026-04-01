@@ -1,0 +1,3 @@
+## 2026-04-01 - [Tactile Scaling for VR UI Buttons]
+**Learning:** [When implementing coroutine-based visual scaling feedback (down and up) for VR or 3D UI buttons, hardcoding target scales like `Vector3.one` can break custom scales set in the Unity Inspector. Also, Coroutines must be handled correctly in `OnDisable` to avoid leaving objects in weird visual states if deactivated mid-animation.]
+**Action:** [Always cache the initial scale in `Awake()` (`originalScale = transform.localScale`), calculate feedback targets relative to this cached value (e.g. `originalScale * 0.9f`), and reset `transform.localScale = originalScale` inside `OnDisable()` after stopping the animation Coroutine.]
