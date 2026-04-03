@@ -1,0 +1,3 @@
+## 2024-05-15 - Visual/Tactile UI Feedback for VR
+**Learning:** In VR applications, interactive elements like buttons need immediate visual and tactile feedback to feel responsive, especially since traditional hover states aren't always available or intuitive.
+**Action:** Implemented a standard pattern using Coroutines to animate UI element scale down to 0.9x and back over 0.1s on press. Caching the original scale in `Awake()` and resetting it in `OnDisable()` ensures stability across custom Inspector configurations without breaking custom states or getting stuck in disabled states.
