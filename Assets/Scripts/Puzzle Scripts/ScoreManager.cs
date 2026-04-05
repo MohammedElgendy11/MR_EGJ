@@ -21,6 +21,9 @@ public class ScoreManager : MonoBehaviour
 
     void UpdateUI()
     {
-        scoreText.text = $"Score: {score}";
+        if (scoreText != null)
+        {
+            scoreText.text = $"Score: {score}";
+        }
     }
 }

@@ -32,7 +32,7 @@ public class PuzzleUIController : MonoBehaviour
 
     public void ShowNextHint()
     {
-        if (hintIndex >= currentPuzzle.hints.Length)
+        if (currentPuzzle == null || currentPuzzle.hints == null || hintIndex >= currentPuzzle.hints.Length)
             return;
 
         // Activate only the current hint panel
