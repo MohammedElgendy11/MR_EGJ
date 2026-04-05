@@ -75,7 +75,10 @@ public class KeypadController : MonoBehaviour
 
     void UpdateDisplay()
     {
-        displayText.text = string.IsNullOrEmpty(currentInput) ? "----" : currentInput;
+        if (displayText != null)
+        {
+            displayText.text = string.IsNullOrEmpty(currentInput) ? "----" : currentInput;
+        }
     }
 
     void Unlock()
