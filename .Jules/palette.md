@@ -1,0 +1,3 @@
+## 2025-04-12 - [VR UI Tactile Feedback]
+**Learning:** VR UI elements (like KeypadButton and HintButton) lack natural tactile feedback. Adding simple visual coroutine-based animations (like brief scaling down to 0.9x and back on click) provides essential confirmation to the user that their interaction was registered, significantly improving the perceived responsiveness and accessibility of the interface. It's crucial to cache the initial scale to avoid conflicting with custom designer setups, and always handle `OnDisable` cleanup.
+**Action:** When creating interactive UI components for VR scenes without physics-based buttons, automatically integrate a quick scale-bounce or color-flash coroutine. Ensure coroutines stop correctly when disabled.
