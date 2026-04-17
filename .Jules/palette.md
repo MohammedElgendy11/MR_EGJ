@@ -1,0 +1,3 @@
+## 2024-04-17 - [Visual Feedback on Keypad Buttons]
+**Learning:** VR UI buttons without tactile visual feedback can feel unresponsive or confusing to users since they can't physically "feel" the button press.
+**Action:** Always implement a brief scale down/up coroutine animation on interaction. Cache the original scale in `Awake` and restore it in `OnDisable` to prevent state corruption upon interaction interruption.
