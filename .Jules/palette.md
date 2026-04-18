@@ -1,0 +1,3 @@
+## 2024-04-18 - Visual Tactile Feedback for VR UI
+**Learning:** In VR interfaces, elements that lack physical resistance or tactile feedback can lead to interaction uncertainty. A visual "press" effect (scaling down slightly and then back up) is an accessibility and UX improvement that provides clear confirmation of interaction.
+**Action:** Always cache the original scale in `Awake` and restore it in `OnDisable` when animating scale, to prevent state corruption upon interaction interruption. Handle Coroutine references to avoid overlapping animations.
