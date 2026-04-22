@@ -1,0 +1,3 @@
+## 2024-10-24 - Visual Tactile Feedback in VR UI Scene Transitions
+**Learning:** Immediate scene transitions in VR often obscure UI button interaction feedback, making the UI feel unresponsive or disconnected because the user doesn't have time to perceive the visual cue (e.g., button press animation) before the context changes.
+**Action:** When implementing UI actions that cause scene transitions (or other immediate heavy context switches), add a brief Coroutine to execute the visual tactile feedback (like scaling down and up), and delay the functional action (e.g., `SceneManager.LoadScene`) until the animation completes. Always cache `originalScale` in `Awake` and restore it in `OnDisable` to prevent scale corruption if the interaction is interrupted.
