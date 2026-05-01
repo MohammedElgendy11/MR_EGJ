@@ -1,10 +1,62 @@
+using System.Collections;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class PlayAgainBtn : MonoBehaviour
 {
+    private Vector3 originalScale;
+    private Coroutine pressCoroutine;
+
+    private void Awake()
+    {
+        originalScale = transform.localScale;
+    }
+
+    private void OnDisable()
+    {
+        transform.localScale = originalScale;
+        if (pressCoroutine != null)
+        {
+            StopCoroutine(pressCoroutine);
+            pressCoroutine = null;
+        }
+    }
+
     public void PlayAgain()
     {
+        if (pressCoroutine != null)
+        {
+            StopCoroutine(pressCoroutine);
+        }
+        pressCoroutine = StartCoroutine(PressAnimationAndLoad());
+    }
+
+    private IEnumerator PressAnimationAndLoad()
+    {
+        // Visual tactile feedback: scale down
+        Vector3 targetScale = originalScale * 0.9f;
+        float duration = 0.1f;
+        float elapsed = 0f;
+
+        while (elapsed < duration)
+        {
+            transform.localScale = Vector3.Lerp(originalScale, targetScale, elapsed / duration);
+            elapsed += Time.deltaTime;
+            yield return null;
+        }
+        transform.localScale = targetScale;
+
+        // Scale back up slightly
+        elapsed = 0f;
+        while (elapsed < duration)
+        {
+            transform.localScale = Vector3.Lerp(targetScale, originalScale, elapsed / duration);
+            elapsed += Time.deltaTime;
+            yield return null;
+        }
+        transform.localScale = originalScale;
+
+        // Perform the action after tactile feedback is perceived
         Scene currentScene = SceneManager.GetActiveScene();
         SceneManager.LoadScene(currentScene.buildIndex);
     }
