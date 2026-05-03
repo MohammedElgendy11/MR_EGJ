@@ -1,0 +1,3 @@
+## 2024-05-03 - Micro-interactions for Scene Transitions
+**Learning:** Adding a simple tactile visual scale coroutine to basic UI buttons significantly improves the perceived responsiveness of VR/diegetic UI before heavy scene-load operations lock the main thread.
+**Action:** When implementing button feedback in Unity UI that precedes synchronous operations (like `SceneManager.LoadScene`), ensure the logical payload executes *after* the animation coroutine completes so the feedback is fully perceived. Always use `Time.unscaledDeltaTime` to prevent hangs if the game over state sets timescale to 0.
