@@ -1,0 +1,3 @@
+## 2026-05-11 - Delayed Scene Transitions for VR Tactile Feedback
+**Learning:** VR UI elements need to provide physical-like visual tactile feedback (like scaling down on press). However, if an action like `SceneManager.LoadScene()` is triggered instantly, the scene freezes or unloads before the user perceives the feedback animation, making the interaction feel broken or unresponsive.
+**Action:** When implementing scene transitions or major state changes on UI interactions in VR, execute the functional action at the end of a brief visual feedback coroutine (e.g., waiting for the scale animation to complete) rather than immediately.
