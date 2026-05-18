@@ -1,0 +1,3 @@
+## 2024-05-18 - Visual Tactile Feedback for VR UI Buttons
+**Learning:** In VR environments, flat UI buttons lacking visual states feel unresponsive and break immersion. Adding a brief physical transformation (like a scale down/up coroutine) provides immediate, satisfying tactile feedback that confirms the user's interaction before destructive actions like scene transitions occur.
+**Action:** Always implement a brief scaling animation on VR UI interaction. Cache original scale in Awake, restore in OnDisable to prevent state corruption, and use Time.unscaledDeltaTime so the feedback plays even if the game is paused. Delay the functional action (e.g., LoadScene) until the visual feedback completes.
