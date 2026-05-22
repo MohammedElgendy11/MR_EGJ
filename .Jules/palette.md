@@ -1,0 +1,3 @@
+## 2024-05-24 - VR UI Button Tactile Feedback
+**Learning:** VR UIs lack physical feedback, making it hard to know if a button click registered, especially if there's a delay before the action (like scene loading). Immediate visual feedback like a quick scale animation helps confirm the interaction.
+**Action:** When implementing UI buttons, especially those that trigger blocking operations like scene loads, add a brief, interruptible scale down/up coroutine using `Time.unscaledDeltaTime` (so it works even if game is paused) before executing the action. Always cache scale in `Awake` and restore it in `OnDisable` to prevent state corruption.
