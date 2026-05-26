@@ -1,0 +1,3 @@
+## 2024-05-26 - Add tactile feedback to VR UI scene transitions
+**Learning:** In VR interfaces, triggering a scene load immediately on button press can feel jarring and lacks physical confirmation. Users need visual tactile feedback (like a brief scale down/up) before the scene disappears.
+**Action:** Always implement a brief scale down/up coroutine animation on interaction. Cache the original scale in `Awake` and restore it in `OnDisable` to prevent state corruption upon interaction interruption. Ensure functional actions (like `SceneManager.LoadScene`) execute at the end of the visual tactile feedback coroutine rather than immediately. Use `Time.unscaledDeltaTime` to ensure animations don't hang if the timescale is 0.
