@@ -1,0 +1,3 @@
+## 2024-05-27 - VR Button Tactile Feedback and Scene Transitions
+**Learning:** In VR environments, buttons lacking tactile visual feedback make it difficult for users to confirm successful interaction. Furthermore, if the interaction triggers a scene transition immediately, the feedback animation is visually truncated, confusing the user and breaking immersion.
+**Action:** Always implement a visual tactile feedback animation (e.g., scale down and up) upon interaction, ensure `Time.unscaledDeltaTime` is used for animation independent of timescale, wait for the animation to complete before triggering functional transitions (like loading a scene), and always manage state correctly (e.g., restoring original scale in `OnDisable`).
