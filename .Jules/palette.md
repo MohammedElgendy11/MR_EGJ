@@ -1,0 +1,3 @@
+## 2024-05-31 - Tactile Feedback Coroutine Interruption
+**Learning:** When implementing coroutines for UI animations (e.g., visual tactile feedback scaling on buttons like `PlayAgainBtn`), the original scale can become corrupted if the GameObject is disabled before the coroutine finishes, or if the user clicks multiple times rapidly.
+**Action:** Always cache the original scale in `Awake()`, restore it explicitly in `OnDisable()`, and maintain a reference to the active `Coroutine` so it can be stopped via `StopCoroutine()` before a new one is started. Additionally, always use `Time.unscaledDeltaTime` to ensure the animation isn't blocked when timescale is 0.
