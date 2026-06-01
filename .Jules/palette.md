@@ -1,0 +1,3 @@
+## 2026-06-01 - VR UI Tactile Feedback
+**Learning:** VR UI buttons lack physical resistance, so visual tactile feedback (like scaling down on press) is crucial for communicating interaction. Interruptions during these animations can permanently corrupt the button's visual state (scale) if the original state isn't cached. Scene transitions should be deferred until the visual feedback completes, otherwise users won't see it.
+**Action:** Implement brief scale-down/up coroutines for VR button interactions using `Time.unscaledDeltaTime`. Always cache the original scale in `Awake`, restore it in `OnDisable`, stop previous coroutines before starting a new one, and defer functional actions (like scene loading) until the animation finishes.
