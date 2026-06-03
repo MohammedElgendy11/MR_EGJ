@@ -1,0 +1,3 @@
+## 2024-06-03 - Delay Scene Transition for Visual Feedback
+**Learning:** When adding visual tactile feedback to UI buttons that trigger immediate destructive or state-changing actions (like scene unloads), the visual feedback can be completely lost if the action happens immediately.
+**Action:** Always wrap the visual animation in a coroutine and perform the final action (e.g., `SceneManager.LoadScene`) at the end of the coroutine, rather than immediately in the click handler. This ensures the user fully perceives the button press interaction.
