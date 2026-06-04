@@ -1,0 +1,3 @@
+## 2025-06-04 - Visual Tactile Feedback in VR UI
+**Learning:** VR UI elements require visual tactile feedback (like a brief scale down/up animation on interaction) to compensate for the lack of physical touch, making interactions feel responsive and intentional.
+**Action:** Always implement a brief scale coroutine animation using `Time.unscaledDeltaTime` (to avoid timescale issues) on VR button interactions. Ensure the original scale is cached in `Awake` and explicitly restored in `OnDisable` to prevent state corruption if the animation is interrupted.
