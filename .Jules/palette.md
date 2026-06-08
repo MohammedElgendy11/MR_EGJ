@@ -1,0 +1,3 @@
+## 2024-06-08 - Visual Tactile Feedback for VR Buttons
+**Learning:** VR UI buttons lack physical tactile feedback, making it hard for users to know if an interaction registered. Immediate functional responses (like scene loading) can jar the user if not preceded by visual acknowledgment. Unscaled time must be used so animations play even if the game is paused.
+**Action:** Implemented a short scale down/up coroutine on `PlayAgainBtn` using `Time.unscaledDeltaTime` that completes *before* executing the scene transition, providing essential visual tactile feedback. Cached and restored original scale in `Awake` and `OnDisable` to prevent state corruption upon interaction interruption.
