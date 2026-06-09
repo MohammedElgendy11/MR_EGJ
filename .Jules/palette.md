@@ -1,0 +1,3 @@
+## 2024-05-14 - VR Button Visual Feedback
+**Learning:** In VR interfaces, immediate scene transitions triggered by UI buttons can feel abrupt or accidental because they lack tactile resistance. A brief visual 'push' (scale down/up coroutine) before the action executes provides necessary confirmation feedback to the user.
+**Action:** When buttons trigger hard state changes like SceneManager.LoadScene, wrap the action in a coroutine that animates a scale down/up effect over ~0.15s, ensuring the scene transition occurs *after* the feedback is perceived. Always cache the original scale in Awake and use Time.unscaledDeltaTime.
