@@ -1,0 +1,3 @@
+## 2024-06-24 - Play Again Button Tactile Feedback
+**Learning:** In Unity, simple interaction scripts like `PlayAgainBtn.cs` often lack visual feedback, making UI feel unresponsive before scene loading interrupts interaction. Implementing a simple Coroutine for visual scaling enhances responsiveness, but it's crucial to use `Time.unscaledDeltaTime` so that the animation runs even if the game is paused (Time.timeScale = 0).
+**Action:** When adding coroutine-based animations to UI components that trigger scene loads, use `Time.unscaledDeltaTime` to ensure the animation completes and always cache the original state (like `localScale`) in `Awake` and restore it in `OnDisable` to prevent the UI from becoming permanently shrunken if the load happens mid-animation.
