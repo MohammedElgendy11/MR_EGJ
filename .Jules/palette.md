@@ -1,0 +1,3 @@
+## 2026-06-26 - Added tactile feedback to PlayAgainBtn
+**Learning:** Adding a short scale up/down animation before a scene transition provides critical tactile feedback for users pressing buttons in VR/UI. Caching the original scale in Awake and restoring it in OnDisable is crucial to prevent the button from becoming permanently shrunken if the scene transition interrupts the coroutine, which is a common edge case for interactive UI buttons that trigger loads.
+**Action:** Always implement scale caching (store in Awake, restore in OnDisable) when using Mathf.Lerp for button animations, and ensure Time.unscaledDeltaTime is used so animations don't hang during timescale changes.
