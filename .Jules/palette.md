@@ -1,0 +1,3 @@
+## 2024-07-08 - Added Tactile Feedback to Scene Transition Buttons
+**Learning:** For scene-transitioning UI buttons, executing the transition action immediately deprives users of critical tactile feedback. Implementing a micro-interaction (like a brief scale down/up) before the scene loads confirms the action and makes the UI feel responsive, especially in an immersive or game context where feedback is key.
+**Action:** Ensure functional actions for major UI interactions are deferred until after a brief visual confirmation animation (using `Time.unscaledDeltaTime` to avoid timescale issues). Always cache and restore states (`Awake`/`OnDisable`) to prevent state corruption if interrupted.
