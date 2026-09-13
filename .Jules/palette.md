@@ -1,0 +1,3 @@
+## 2024-09-13 - Added Tactile Feedback to Play Again Button
+**Learning:** Implemented a standard button scale animation using a Coroutine with `Time.unscaledDeltaTime` to ensure it runs even if the game is paused on game over screens. The boolean flag `isTransitioning` provides a good pattern for debouncing rapid clicks.
+**Action:** Use `Time.unscaledDeltaTime` for UI animations, especially on overlay menus that might appear during paused states. Also, caching original state in `Awake` and restoring in `OnDisable` is critical to prevent permanent scale distortion if a scene loads or object disables mid-animation.
